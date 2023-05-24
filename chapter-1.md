@@ -302,11 +302,5 @@ Give concise mathematical definitions for the functions computed by the function
 ```js
 f(n); // 2n
 g(n); // 2ⁿ
-
-h(n); // 2
-A(1, 3);
-A(1, A(1, 2));
-A(1, A(1, A(1, 1)));
-A(1, 2);
-2;
+h(n); // 2ʰ⁽ⁿ⁻¹⁾
 ```
