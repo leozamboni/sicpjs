@@ -304,3 +304,68 @@ f(n); // 2n
 g(n); // 2ⁿ
 h(n); // 2ʰ⁽ⁿ⁻¹⁾
 ```
+
+### 1.11 A function f is defined by the rules f(n) = n if n < 3 and f(n) = f(n – 1) + 2f(n – 2) + 3f(n – 3) if n ≥ 3. Write a JavaScript function that computes f by means of a recursive process. Write a function that computes f by means of an iterative process.
+
+```js
+// recursive
+function f_rec(n) {
+  return n < 3 ? n : f_rec(n - 1) + 2 * f_rec(n - 2) + 3 * f_rec(n - 3);
+}
+
+// iterative
+function f_it(n) {
+  function f_loop(n1, n2, n3, nth) {
+    if (n === nth) return n1;
+    else return f_loop(n1 + 2 * n2 + 3 * n3, n1, n2, nth + 1);
+  }
+  if (n < 3) return n;
+  else return f_loop(2, 1, 0, 2);
+}
+
+f_rec(5);
+f_it(5);
+```
+
+### 1.12 The following pattern of numbers is called Pascal’s triangle
+
+```
+      1
+     1 1
+    1 2 1
+   1 3 3 1
+  1 4 6 4 1
+ 1 5 10 10 5 1
+  . . .
+```
+
+The numbers at the edge of the triangle are all 1, and each number inside the triangle is the sum of the two numbers above it.33 Write a function that computes elements of Pascal’s triangle by means of a recursive process
+
+```js
+function pascal_triangle(l, nth) {
+  if (nth === l) return;
+
+  function factor(x) {
+    if (x === 1) return x;
+    return x * factor(x - 1);
+  }
+
+  function binomial_coe(n, m) {
+    if (!m) return 1;
+    if (n === m) return 1;
+    return factor(n) / (factor(n - m) * factor(m));
+  }
+
+  function row(j) {
+    if (j === l) return;
+    process.stdout.write(binomial_coe(j, nth) + " ");
+    return row(j + 1);
+  }
+
+  row(nth);
+  console.log();
+  return pascal_triangle(l, nth + 1);
+}
+
+pascal_triangle(5, 0);
+```
